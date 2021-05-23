@@ -1,10 +1,11 @@
 import numpy as np
 import csv
 
-import tensorflow as tf
-from keras import backend as K
-from keras.datasets import cifar10
-from keras.utils import to_categorical
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+from tensorflow.compat.v1.keras import backend as K
+from tensorflow.compat.v1.keras.datasets import cifar10
+from tensorflow.compat.v1.keras.utils import to_categorical
 
 from controller import Controller, StateSpace
 from manager import NetworkManager

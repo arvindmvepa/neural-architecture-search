@@ -1,11 +1,11 @@
-from keras.engine import Layer
-from keras import activations
-from keras import initializers
-from keras import regularizers
-from keras import constraints
-from keras import backend as K
-from keras.layers import RNN
-from keras.layers.recurrent import _generate_dropout_mask, _generate_dropout_ones
+from tensorflow.compat.v1.keras.engine import Layer
+from tensorflow.compat.v1.keras import activations
+from tensorflow.compat.v1.keras import initializers
+from tensorflow.compat.v1.keras import regularizers
+from tensorflow.compat.v1.keras import constraints
+from tensorflow.compat.v1.keras import backend as K
+from tensorflow.compat.v1.keras.layers import RNN
+from tensorflow.compat.v1.keras.layers.recurrent import _generate_dropout_mask, _generate_dropout_ones
 
 import warnings
 

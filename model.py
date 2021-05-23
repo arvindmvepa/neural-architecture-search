@@ -1,5 +1,5 @@
-from keras.models import Model
-from keras.layers import Input, Dense, Conv2D, GlobalAveragePooling2D
+from tensorflow.compat.v1.keras.models import Model
+from tensorflow.compat.v1.keras.layers import Input, Dense, Conv2D, GlobalAveragePooling2D
 
 # generic model design
 def model_fn(actions):
