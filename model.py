@@ -12,7 +12,8 @@ def model_fn(actions):
     x = Conv2D(filters_3, (kernel_3, kernel_3), strides=(2, 2), padding='same', activation='relu')(x)
     x = Conv2D(filters_4, (kernel_4, kernel_4), strides=(1, 1), padding='same', activation='relu')(x)
     x = GlobalAveragePooling2D()(x)
-    x = Dense(10, activation='softmax')(x)
+    x = Dense(2, activation='softmax')(x)
+    #x = Dense(10, activation='softmax')(x)
 
     model = Model(ip, x)
     return model
