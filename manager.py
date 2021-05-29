@@ -10,7 +10,7 @@ class NetworkManager:
     '''
     Helper class to manage the generation of subnetwork training given a dataset
     '''
-    def __init__(self, dataset, epochs=5, child_batchsize=128, acc_beta=0.8, clip_rewards=0.0):
+    def __init__(self, dataset, epochs=5, acc_beta=0.8, clip_rewards=0.0):
         '''
         Manager which is tasked with creating subnetworks, training them on a dataset, and retrieving
         rewards in the term of accuracy, which is passed to the controller RNN.
@@ -25,7 +25,6 @@ class NetworkManager:
         '''
         self.dataset = dataset
         self.epochs = epochs
-        self.batchsize = child_batchsize
         self.clip_rewards = clip_rewards
 
         self.beta = acc_beta
@@ -69,8 +68,7 @@ class NetworkManager:
             train_gen, val_gen = self.dataset
 
             # train the model using Keras methods
-            model.fit(train_gen, batch_size=self.batchsize, epochs=self.epochs,
-                      verbose=1, validation_data=val_gen,
+            model.fit(train_gen, epochs=self.epochs, verbose=1, validation_data=val_gen,
                       callbacks=[ModelCheckpoint('weights/temp_network.h5',
                                                  monitor='val_acc', verbose=1,
                                                  save_best_only=True,
