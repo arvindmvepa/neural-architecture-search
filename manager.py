@@ -16,7 +16,7 @@ class NetworkManager:
         rewards in the term of accuracy, which is passed to the controller RNN.
 
         Args:
-            dataset: a tuple of 4 arrays (X_train, y_train, X_val, y_val)
+            dataset: a tuple of 2 generators (train_gen, val_gen)
             epochs: number of epochs to train the subnetworks
             child_batchsize: batchsize of training the subnetworks
             acc_beta: exponential weight for the accuracy
@@ -66,11 +66,11 @@ class NetworkManager:
             model.compile('adam', 'categorical_crossentropy', metrics=['accuracy'])
 
             # unpack the dataset
-            X_train, y_train, X_val, y_val = self.dataset
+            train_gen, val_gen = self.dataset
 
             # train the model using Keras methods
-            model.fit(X_train, y_train, batch_size=self.batchsize, epochs=self.epochs,
-                      verbose=1, validation_data=(X_val, y_val),
+            model.fit(train_gen, batch_size=self.batchsize, epochs=self.epochs,
+                      verbose=1, validation_data=val_gen,
                       callbacks=[ModelCheckpoint('weights/temp_network.h5',
                                                  monitor='val_acc', verbose=1,
                                                  save_best_only=True,
