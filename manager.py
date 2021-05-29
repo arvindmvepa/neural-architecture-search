@@ -69,7 +69,7 @@ class NetworkManager:
             train_gen, val1_gen, val2_gen = self.dataset
 
             # train the model using Keras methods
-            model.fit(train_gen, epochs=self.epochs, verbose=1, validation_data=val_gen,
+            model.fit(train_gen, epochs=self.epochs, verbose=1, validation_data=val1_gen,
                       callbacks=[ModelCheckpoint('weights/temp_network.h5',
                                                  monitor='val_acc', verbose=1,
                                                  save_best_only=True,
