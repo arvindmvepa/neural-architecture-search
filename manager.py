@@ -66,7 +66,7 @@ class NetworkManager:
             model.compile('adam', 'categorical_crossentropy', metrics=['accuracy'])
 
             # unpack the dataset
-            train_gen, val_gen = self.dataset
+            train_gen, val1_gen, val2_gen = self.dataset
 
             # train the model using Keras methods
             model.fit(train_gen, epochs=self.epochs, verbose=1, validation_data=val_gen,
@@ -79,7 +79,7 @@ class NetworkManager:
             model.load_weights('weights/temp_network.h5')
 
             # evaluate the model
-            loss, acc = model.evaluate(X_val, y_val, batch_size=self.batchsize)
+            loss, acc = model.evaluate(val2_gen)
 
             # compute the reward
             reward = (acc - self.moving_acc)
