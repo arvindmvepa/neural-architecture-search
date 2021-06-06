@@ -20,7 +20,8 @@ def model_fn(actions, image_dim):
     """
     ip = Input(shape=image_dim)
     model = DenseNet121(include_top=True,
-                        weights="imagenet",
+                        #weights="imagenet",
+                        weights=None,
                         input_tensor=ip,
                         input_shape=image_dim,
                         pooling=None,
