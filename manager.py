@@ -10,16 +10,16 @@ class NetworkManager:
     '''
     Helper class to manage the generation of subnetwork training given a dataset
     '''
-    def __init__(self, dataset, image_dim, epochs=5, acc_beta=0.8, clip_rewards=0.0):
+    def __init__(self, dataset, image_dim, epochs=5, auc_beta=0.8, clip_rewards=0.0):
         '''
         Manager which is tasked with creating subnetworks, training them on a dataset, and retrieving
-        rewards in the term of accuracy, which is passed to the controller RNN.
+        rewards in the term of aucroc, which is passed to the controller RNN.
 
         Args:
             dataset: a tuple of 2 generators (train_gen, val_gen)
             epochs: number of epochs to train the subnetworks
             child_batchsize: batchsize of training the subnetworks
-            acc_beta: exponential weight for the accuracy
+            auc_beta: exponential weight for the aucroc
             clip_rewards: float - to clip rewards in [-range, range] to prevent
                 large weight updates. Use when training is highly unstable.
         '''
@@ -28,8 +28,8 @@ class NetworkManager:
         self.epochs = epochs
         self.clip_rewards = clip_rewards
 
-        self.beta = acc_beta
-        self.beta_bias = acc_beta
+        self.beta = auc_beta
+        self.beta_bias = auc_beta
         self.moving_auc = 0.0
 
     def get_rewards(self, model_fn, actions):
@@ -79,7 +79,7 @@ class NetworkManager:
             model.load_weights('weights/temp_network.h5')
 
             # evaluate the model
-            loss, acc, auc = model.evaluate(val2_gen)
+            loss, _, auc = model.evaluate(val2_gen)
 
             # compute the reward
             reward = (auc - self.moving_auc)
@@ -88,9 +88,9 @@ class NetworkManager:
             if self.clip_rewards:
                 reward = np.clip(reward, -0.05, 0.05)
 
-            # update moving accuracy with bias correction for 1st update
+            # update moving auc with bias correction for 1st update
             if self.beta > 0.0 and self.beta < 1.0:
-                self.moving_auc = self.beta * self.moving_auc + (1 - self.beta) * acc
+                self.moving_auc = self.beta * self.moving_auc + (1 - self.beta) * auc
                 self.moving_auc = self.moving_auc / (1 - self.beta_bias)
                 self.beta_bias = 0
 
@@ -102,4 +102,4 @@ class NetworkManager:
         # clean up resources and GPU memory
         network_sess.close()
 
-        return reward, acc
+        return reward, auc

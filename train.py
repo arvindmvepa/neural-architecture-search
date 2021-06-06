@@ -24,7 +24,7 @@ EXPLORATION = 0.8  # high exploration for the first 1000 steps
 REGULARIZATION = 1e-3  # regularization strength
 CONTROLLER_CELLS = 32  # number of cells in RNN controller
 EMBEDDING_DIM = 20  # dimension of the embeddings for each state
-ACCURACY_BETA = 0.8  # beta value for the moving average of the accuracy
+AUCROC_BETA = 0.8  # beta value for the moving average of the aucroc
 CLIP_REWARDS = 0.0  # clip rewards in the [-0.05, 0.05] range
 RESTORE_CONTROLLER = True  # restore controller to continue training
 
@@ -61,7 +61,7 @@ with policy_sess.as_default():
 
 # create the Network Manager
 manager = NetworkManager(dataset, epochs=MAX_EPOCHS, child_batchsize=CHILD_BATCHSIZE, clip_rewards=CLIP_REWARDS,
-                         acc_beta=ACCURACY_BETA)
+                         auc_beta=ACCURACY_BETA)
 
 # get an initial random state space if controller needs to predict an
 # action from the initial state
