@@ -82,7 +82,7 @@ class NetworkManager:
             loss, acc, auc = model.evaluate(val2_gen)
 
             # compute the reward
-            reward = (acc - self.moving_auc)
+            reward = (auc - self.moving_auc)
 
             # if rewards are clipped, clip them in the range -0.05 to 0.05
             if self.clip_rewards:
@@ -97,7 +97,7 @@ class NetworkManager:
                 reward = np.clip(reward, -0.1, 0.1)
 
             print()
-            print("Manager: EWA Accuracy = ", self.moving_auc)
+            print("Manager: EWA AUC = ", self.moving_auc)
 
         # clean up resources and GPU memory
         network_sess.close()
