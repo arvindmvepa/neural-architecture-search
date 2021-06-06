@@ -63,7 +63,7 @@ class NetworkManager:
 
             # generate a submodel given predicted actions
             model = model_fn(actions, self.image_dim)  # type: Model
-            model.compile('adam', 'categorical_crossentropy', metrics=['accuracy'])
+            model.compile('adam', 'categorical_crossentropy', metrics=['accuracy', tf.keras.metrics.AUC()])
 
             # unpack the dataset
             train_gen, val1_gen, val2_gen = self.dataset
