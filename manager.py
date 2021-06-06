@@ -13,13 +13,13 @@ class NetworkManager:
     def __init__(self, dataset, image_dim, epochs=5, auc_beta=0.8, clip_rewards=0.0):
         '''
         Manager which is tasked with creating subnetworks, training them on a dataset, and retrieving
-        rewards in the term of aucroc, which is passed to the controller RNN.
+        rewards in the term of auc, which is passed to the controller RNN.
 
         Args:
             dataset: a tuple of 2 generators (train_gen, val_gen)
             epochs: number of epochs to train the subnetworks
             child_batchsize: batchsize of training the subnetworks
-            auc_beta: exponential weight for the aucroc
+            auc_beta: exponential weight for the auc
             clip_rewards: float - to clip rewards in [-range, range] to prevent
                 large weight updates. Use when training is highly unstable.
         '''
