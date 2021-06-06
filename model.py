@@ -1,6 +1,6 @@
 #from tensorflow.compat.v1.keras.models import Model
 from tensorflow.compat.v1.keras.layers import Input, Dense, Conv2D, GlobalAveragePooling2D
-from tensorflow.compat.v1-keras.applications import DenseNet121
+from tensorflow.compat.v1.keras.applications import DenseNet121
 
 # generic model design
 def model_fn(actions, image_dim):
