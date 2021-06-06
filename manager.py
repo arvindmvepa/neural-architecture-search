@@ -30,7 +30,7 @@ class NetworkManager:
 
         self.beta = acc_beta
         self.beta_bias = acc_beta
-        self.moving_acc = 0.0
+        self.moving_auc = 0.0
 
     def get_rewards(self, model_fn, actions):
         '''
@@ -71,7 +71,7 @@ class NetworkManager:
             # train the model using Keras methods
             model.fit(train_gen, epochs=self.epochs, verbose=1, validation_data=val1_gen,
                       callbacks=[ModelCheckpoint('weights/temp_network.h5',
-                                                 monitor='val_acc', verbose=1,
+                                                 monitor='val_auc', verbose=1,
                                                  save_best_only=True,
                                                  save_weights_only=True)])
 
@@ -79,10 +79,10 @@ class NetworkManager:
             model.load_weights('weights/temp_network.h5')
 
             # evaluate the model
-            loss, acc = model.evaluate(val2_gen)
+            loss, acc, auc = model.evaluate(val2_gen)
 
             # compute the reward
-            reward = (acc - self.moving_acc)
+            reward = (acc - self.moving_auc)
 
             # if rewards are clipped, clip them in the range -0.05 to 0.05
             if self.clip_rewards:
@@ -90,14 +90,14 @@ class NetworkManager:
 
             # update moving accuracy with bias correction for 1st update
             if self.beta > 0.0 and self.beta < 1.0:
-                self.moving_acc = self.beta * self.moving_acc + (1 - self.beta) * acc
-                self.moving_acc = self.moving_acc / (1 - self.beta_bias)
+                self.moving_auc = self.beta * self.moving_auc + (1 - self.beta) * acc
+                self.moving_auc = self.moving_auc / (1 - self.beta_bias)
                 self.beta_bias = 0
 
                 reward = np.clip(reward, -0.1, 0.1)
 
             print()
-            print("Manager: EWA Accuracy = ", self.moving_acc)
+            print("Manager: EWA Accuracy = ", self.moving_auc)
 
         # clean up resources and GPU memory
         network_sess.close()
