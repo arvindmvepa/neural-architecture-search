@@ -71,8 +71,8 @@ class NetworkManager:
             # train the model using Keras methods
             model.fit(train_gen, epochs=self.epochs, verbose=1, validation_data=val1_gen,
                       callbacks=[ModelCheckpoint('weights/temp_network.h5',
-                                                 monitor='val_auc', verbose=1,
-                                                 save_best_only=True,
+                                                 monitor='val_auc', mode='max',
+                                                 verbose=1, save_best_only=True,
                                                  save_weights_only=True)])
 
             # load best performance epoch in this training session
