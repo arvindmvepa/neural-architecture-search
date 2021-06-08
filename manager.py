@@ -73,7 +73,7 @@ class NetworkManager:
 
             # generate a submodel given predicted actions
             opt = optimizers[actions[0]](lr=actions[1])
-            model = model_fn(self.image_dim)  # type: Model
+            model = model_fn(self.image_dim, actions[2])  # type: Model
             model.compile(opt, 'categorical_crossentropy', metrics=['accuracy', tf.keras.metrics.AUC()])
 
             # unpack the dataset
