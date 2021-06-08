@@ -1,6 +1,7 @@
 #from tensorflow.compat.v1.keras.models import Model
 from tensorflow.compat.v1.keras.layers import Input, Dense, Conv2D, GlobalAveragePooling2D
-from tensorflow.compat.v1.keras.applications import DenseNet121, DenseNet169, DenseNet201, ResNet50, ResNet101, ResNet152,InceptionV3, ResNet50V2, EfficientNetB1, EfficientNetB2, EfficientNetB3
+from tensorflow.compat.v1.keras.applications import DenseNet121, DenseNet169, DenseNet201, ResNet50, ResNet101, ResNet152,InceptionV3, ResNet50V2, from tensorflow.compat.v1.keras.applications import DenseNet121, DenseNet169, DenseNet201, ResNet50, ResNet101, ResNet152,InceptionV3, ResNet50V2, EfficientNetB0, EfficientNetB1, EfficientNetB2, EfficientNetB3, EfficientNetB4, EfficientNetB5, EfficientNetB6, EfficientNetB7
+EfficientNetB1, EfficientNetB2, EfficientNetB3
 
 archs_map ={ 'resnet50': ResNet50,
              'resnet50v2': ResNet50V2,
@@ -12,7 +13,11 @@ archs_map ={ 'resnet50': ResNet50,
              'inception': InceptionV3,
              'effnetb1': EfficientNetB1,
              'effnetb2': EfficientNetB2,
-             'effnetb3': EfficientNetB3}
+             'effnetb3': EfficientNetB3,
+             'effnetb4': EfficientNetB4,
+             'effnetb5': EfficientNetB5,
+             'effnetb6': EfficientNetB6,
+             'effnetb7': EfficientNetB7}
 
 # generic model design
 def model_fn(image_dim, arch):
