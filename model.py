@@ -1,7 +1,6 @@
 #from tensorflow.compat.v1.keras.models import Model
 from tensorflow.compat.v1.keras.layers import Input, Dense, Conv2D, GlobalAveragePooling2D
-from tensorflow.compat.v1.keras.applications import DenseNet121, DenseNet169, DenseNet201, ResNet50, ResNet101, ResNet152,InceptionV3, ResNet50V2, from tensorflow.compat.v1.keras.applications import DenseNet121, DenseNet169, DenseNet201, ResNet50, ResNet101, ResNet152,InceptionV3, ResNet50V2, EfficientNetB0, EfficientNetB1, EfficientNetB2, EfficientNetB3, EfficientNetB4, EfficientNetB5, EfficientNetB6, EfficientNetB7
-EfficientNetB1, EfficientNetB2, EfficientNetB3
+from tensorflow.compat.v1.keras.applications import DenseNet121, DenseNet169, DenseNet201, ResNet50, ResNet101, ResNet152,InceptionV3, ResNet50V2, EfficientNetB0, EfficientNetB1, EfficientNetB2, EfficientNetB3, EfficientNetB4, EfficientNetB5, EfficientNetB6, EfficientNetB7
 
 archs_map ={ 'resnet50': ResNet50,
              'resnet50v2': ResNet50V2,
