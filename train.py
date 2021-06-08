@@ -32,8 +32,8 @@ RESTORE_CONTROLLER = True  # restore controller to continue training
 state_space = StateSpace()
 
 # add states
-state_space.add_state(name='kernel', values=[1, 3])
-state_space.add_state(name='filters', values=[16, 32, 64])
+state_space.add_state(name='opt', values=['sgd', 'rms', 'adam', 'adamx', 'agrad'])
+state_space.add_state(name='lr', values=[.1, .01, .001, .0001, .00001, .000001])
 
 # print the state space being searched
 state_space.print_state_space()

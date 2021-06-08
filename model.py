@@ -3,7 +3,7 @@ from tensorflow.compat.v1.keras.layers import Input, Dense, Conv2D, GlobalAverag
 from tensorflow.compat.v1.keras.applications import DenseNet121
 
 # generic model design
-def model_fn(actions, image_dim):
+def model_fn(image_dim):
     """
     # comment out generally
     # unpack the actions from the list

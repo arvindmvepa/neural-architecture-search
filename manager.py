@@ -3,8 +3,18 @@ import numpy as np
 from tensorflow.compat.v1.keras.models import Model
 from tensorflow.compat.v1.keras import backend as K
 from tensorflow.compat.v1.keras.callbacks import ModelCheckpoint
+from tensorflow.compat.v1.keras.optimizers import SGD, RMSprop, Adam, Adamax, Adagrad
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
+
+optimizers = {
+    "sgd": SGD,
+    "rms": RMSprop,
+    "adam": Adam,
+    "adamx": Adamax,
+    "agrad": Adagrad
+}
+
 
 class NetworkManager:
     '''
@@ -62,8 +72,9 @@ class NetworkManager:
             K.set_session(network_sess)
 
             # generate a submodel given predicted actions
-            model = model_fn(actions, self.image_dim)  # type: Model
-            model.compile('adam', 'categorical_crossentropy', metrics=['accuracy', tf.keras.metrics.AUC()])
+            opt = optimizers[actions['opt'](lr=actions['lr'])]
+            model = model_fn(self.image_dim)  # type: Model
+            model.compile(opt, 'categorical_crossentropy', metrics=['accuracy', tf.keras.metrics.AUC()])
 
             # unpack the dataset
             train_gen, val1_gen, val2_gen = self.dataset
