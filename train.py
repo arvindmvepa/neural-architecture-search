@@ -15,7 +15,7 @@ from model import model_fn
 policy_sess = tf.Session()
 K.set_session(policy_sess)
 
-NUM_LAYERS = 4  # number of layers of the state space
+NUM_LAYERS = 1  # number of layers of the state space
 MAX_TRIALS = 250  # maximum number of models generated
 
 MAX_EPOCHS = 10  # maximum number of epochs to train
